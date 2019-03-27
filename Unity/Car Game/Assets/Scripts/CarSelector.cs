@@ -12,7 +12,11 @@ namespace genaralskar
     {
         [Tooltip("Array of all cars you want to be selectable")]
         public Car[] cars;
-        private int currentCarIndex;
+
+        [Tooltip("Object to parent car to\nLeave blank for not parent")]
+        public Transform parentObject;
+        
+        private int currentCarIndex = 0;
         private int currentArmorIndex;
 
         private Car currentCar;
@@ -27,9 +31,13 @@ namespace genaralskar
         public TextMeshProUGUI armorNameFlavorText;
 
 
-
         private GameObject currentCarObj;
         private GameObject currentArmorObj;
+
+        private void Start()
+        {
+            UpdateCar(cars[0]);
+        }
 
         #region Car Selection Functions
         //----====Car Selection Functions====----\\
@@ -37,7 +45,8 @@ namespace genaralskar
         public void NextCar()
         {
             //++current car index
-            currentCarIndex = (currentCarIndex + 1) % (cars.Length - 1);
+            currentCarIndex = (currentCarIndex + 1) % (cars.Length);
+            //Debug.Log(currentCarIndex);
 
             //update car
             UpdateCar(cars[currentCarIndex]);
@@ -46,7 +55,7 @@ namespace genaralskar
         public void PreviousCar()
         {
             //--current car index
-            currentCarIndex = (currentCarIndex - 1) % (cars.Length - 1);
+            currentCarIndex = (Mathf.Abs(currentCarIndex - 1)) % (cars.Length);
 
             //update car
             UpdateCar(cars[currentCarIndex]);
@@ -55,16 +64,17 @@ namespace genaralskar
         public void NextArmor()
         {
             //++current armor index
-            currentArmorIndex = (currentArmorIndex + 1) % (currentCar.armors.Length - 1);
+            currentArmorIndex = (currentArmorIndex + 1) % (currentCar.armors.Length);
 
             //update armor
-            UpdateArmor(currentCar.armors[0]);
+            UpdateArmor(currentCar.armors[currentArmorIndex]);
         }
 
         public void PreviousArmor()
         {
             //--current armor index
-            currentArmorIndex = (currentArmorIndex - 1) % (currentCar.armors.Length - 1);
+            currentArmorIndex = (Mathf.Abs(currentArmorIndex - 1)) % (currentCar.armors.Length);
+            UpdateArmor(currentCar.armors[currentArmorIndex]);
         }
         #endregion
 
@@ -84,8 +94,17 @@ namespace genaralskar
             //destory current armor
             //Destroy(currentArmorObj);
 
+            //set current car
+            currentCar = newCar;
+            
             //spawn new car at index
             currentCarObj = Instantiate(newCar.carPrefab);
+            if (parentObject != null)
+            {
+                currentCarObj.transform.SetParent(parentObject);
+                currentCarObj.transform.localPosition = Vector3.zero;
+                currentCarObj.transform.localRotation = Quaternion.identity;
+            }
 
             //if armor index != 0, reset index
             if (currentArmorIndex != 0) currentArmorIndex = 0;
@@ -105,9 +124,18 @@ namespace genaralskar
                 Destroy(currentArmorObj);
             }
 
+            //set current armor
+            currentArmor = newArmor;
+            
             //spawn new armor
             //probably set parent to car, then don't have to destory on car change
             currentArmorObj = Instantiate(newArmor.armorPrefab);
+            
+            
+            currentArmorObj.transform.SetParent(currentCarObj.transform);
+            currentArmorObj.transform.localPosition = Vector3.zero;
+            currentArmorObj.transform.localRotation = Quaternion.identity;
+            
 
             //update text fields
             UpdateArmorTextFields();
