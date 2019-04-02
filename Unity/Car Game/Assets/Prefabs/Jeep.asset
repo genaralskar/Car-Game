@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c09786f0ee5a64ba2fc161d73a0270, type: 3}
   m_Name: Jeep
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 4361151459222820441, guid: 396bd05d61979c648b9677a3f58d5205,
+  carPrefab: {fileID: 7731436819955072483, guid: b5953474b0817c741b5d3d05b1799e89,
     type: 3}
   carName: Susan
   carFlavor: That's my fuel cap, I don't know you!
