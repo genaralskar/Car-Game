@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2c1e1f430492c4287c1f15fb6a2099, type: 3}
-  m_Name: Sphere Boi
+  m_Script: {fileID: 11500000, guid: 75c09786f0ee5a64ba2fc161d73a0270, type: 3}
+  m_Name: Player Car
   m_EditorClassIdentifier: 
-  armorPrefab: {fileID: 555914674239954179, guid: ca7d3f2fa421d5d4ebb29a11285698f7,
-    type: 3}
-  armorName: Spherey Boi
-  armorFlavor: A big boll of ball
+  carPrefab: {fileID: 0}
+  carName: 
+  carFlavor: 
+  armors: []

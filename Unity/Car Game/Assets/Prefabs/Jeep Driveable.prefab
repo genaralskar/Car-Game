@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 2326906500726385476}
   - component: {fileID: 6247634994830200244}
   m_Layer: 0
-  m_Name: Jeep No Tires
+  m_Name: Jeep Driveable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   horizontalInput: 0
   verticalInput: 0
   wheelAngle: 0
-  input: {fileID: 11400000, guid: 796fe61a08ef60b43821b8a4e3a1d779, type: 2}
+  input: {fileID: 11400000, guid: 88ea3d66431580543a338555e20c474e, type: 2}
   axels:
   - RWheelCollider: {fileID: 4908469664154217863}
     LWheelCollider: {fileID: 3915806530665610352}

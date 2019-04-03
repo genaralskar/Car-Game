@@ -1,20 +1,32 @@
 ﻿using System.Collections;
-using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
-namespace genaralskar
+namespace genaralskar.Cars
 {
     /// <summary>
     /// CarSelector is used to update the currently selected car and it's armor. Used when selecting a car in game.
     /// </summary>
-    public class CarSelector : MonoBehaviour
+    public class CarUpdater : MonoBehaviour
     {
-        [Tooltip("Array of all cars you want to be selectable")]
-        public Car[] cars;
+        [Tooltip("CarDatabase containing all cars wanted to spawn")]
+        public CarDatabase carDatabase;
+        
+//        [Tooltip("Array of all cars you want to be selectable")]
+//        public Car[] cars;
+
+        [Tooltip("Transform for the car to spawn at\nLeave blank to spawn at origin")]
+        public Transform spawnPosition;
 
         [Tooltip("Object to parent car to\nLeave blank for not parent")]
         public Transform parentObject;
+
+        [Tooltip("The Car SO used to save information about player car selection between scenes")]
+        public Car playerCar;
+
+        public UnityAction<GameObject> UpdateCarAction;
+        public UnityAction<GameObject> UpdateArmorAction;
         
         private int currentCarIndex = 0;
         private int currentArmorIndex;
@@ -34,37 +46,42 @@ namespace genaralskar
         private GameObject currentCarObj;
         private GameObject currentArmorObj;
 
-        private void Start()
-        {
-            UpdateCar(cars[0]);
-        }
+//        private void Start()
+//        {
+//            //move this call to another script
+//            UpdateCar(cars[0]);
+//        }
 
+        //probably move these to the car selector script
         #region Car Selection Functions
         //----====Car Selection Functions====----\\
 
         public void NextCar()
         {
             //++current car index
-            currentCarIndex = (currentCarIndex + 1) % (cars.Length);
+            currentCarIndex = (currentCarIndex + 1) % (carDatabase.CARS.Length);
             //Debug.Log(currentCarIndex);
 
             //update car
-            UpdateCar(cars[currentCarIndex]);
+            UpdateCar(carDatabase.CARS[currentCarIndex]);
         }
 
         public void PreviousCar()
         {
             //--current car index
-            currentCarIndex = (Mathf.Abs(currentCarIndex - 1)) % (cars.Length);
+            currentCarIndex = (Mathf.Abs(currentCarIndex - 1)) % (carDatabase.CARS.Length);
 
             //update car
-            UpdateCar(cars[currentCarIndex]);
+            UpdateCar(carDatabase.CARS[currentCarIndex]);
         }
 
         public void NextArmor()
         {
             //++current armor index
             currentArmorIndex = (currentArmorIndex + 1) % (currentCar.armors.Length);
+            
+            //set current armor on car
+            currentCar.currentArmor = currentArmorIndex;
 
             //update armor
             UpdateArmor(currentCar.armors[currentArmorIndex]);
@@ -74,6 +91,11 @@ namespace genaralskar
         {
             //--current armor index
             currentArmorIndex = (Mathf.Abs(currentArmorIndex - 1)) % (currentCar.armors.Length);
+            
+            //set current armor on car
+            currentCar.currentArmor = currentArmorIndex;
+            
+            //update armor
             UpdateArmor(currentCar.armors[currentArmorIndex]);
         }
         #endregion
@@ -99,21 +121,34 @@ namespace genaralskar
             
             //spawn new car at index
             currentCarObj = Instantiate(newCar.carPrefab);
+            
+            //move to correct position
+            if (spawnPosition != null)
+            {
+                currentCarObj.transform.position = spawnPosition.position;
+                currentCarObj.transform.rotation = spawnPosition.rotation;
+            }
+            
+            //parent if wanted
             if (parentObject != null)
             {
                 currentCarObj.transform.SetParent(parentObject);
-                currentCarObj.transform.localPosition = Vector3.zero;
-                currentCarObj.transform.localRotation = Quaternion.identity;
             }
+            
+            //set inputs
 
             //if armor index != 0, reset index
             if (currentArmorIndex != 0) currentArmorIndex = 0;
+            
+            //send out action call
+            UpdateCarAction?.Invoke(currentCarObj);
 
             //update armor
-            UpdateArmor(currentCar.armors[0]);
+            UpdateArmor(currentCar.armors[currentCar.currentArmor]);
 
             //update text fields
-            UpdateCarTextFields();
+            if(carNameFlavorText != null)
+                UpdateCarTextFields();
         }
 
         public void UpdateArmor(Armor newArmor)
@@ -128,22 +163,35 @@ namespace genaralskar
             currentArmor = newArmor;
             
             //spawn new armor
-            //probably set parent to car, then don't have to destory on car change
             currentArmorObj = Instantiate(newArmor.armorPrefab);
             
-            
+            //parent armor to car
             currentArmorObj.transform.SetParent(currentCarObj.transform);
             currentArmorObj.transform.localPosition = Vector3.zero;
             currentArmorObj.transform.localRotation = Quaternion.identity;
             
+            //send out action call
+            UpdateArmorAction?.Invoke(currentArmorObj);
 
             //update text fields
-            UpdateArmorTextFields();
+            if(armorNameFlavorText != null)
+                UpdateArmorTextFields();
+
+            //update player car values
+            playerCar.SetValues(currentCar);
+        }
+
+        public void ResetAllCarValues()
+        {
+            foreach (var car in carDatabase.CARS)
+            {
+                car.currentArmor = 0;
+            }
         }
         #endregion
 
 
-
+        //probably move to car selector script
         #region Update Text Functions
         private void UpdateCarTextFields()
         {
