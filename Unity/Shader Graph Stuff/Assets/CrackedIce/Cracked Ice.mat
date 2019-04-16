@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cracked Ice
+  m_Shader: {fileID: 4800000, guid: 75c0caac152eae34c829abe1b289b0a4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_1A7428B3:
+        m_Texture: {fileID: 2800000, guid: 61f290696df09924aa7351884f873d12, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_1B055B1:
+        m_Texture: {fileID: 2800000, guid: 037c8a88c43984248b77b1cd2a1d44f1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7995961:
+        m_Texture: {fileID: 2800000, guid: 4afbe1b7915c8fb45977172839a5f34d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7F773095:
+        m_Texture: {fileID: 2800000, guid: 8e2870e66a70e204eacdfbbba764dab7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_C71E5738: -0.01
+    m_Colors: []

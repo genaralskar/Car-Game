@@ -13,6 +13,7 @@
 		_RimAmount("Rim Amount", Range(0, 1)) = 0.716
 		_RimThreshold("Rim Threshold", Range(0,1)) = 0.1
 		_MainTex("Main Texture", 2D) = "white" {}
+		_NormalMap("Normal Map", 2D) = "bump" {}
 	}
 	SubShader
 	{
@@ -50,6 +51,7 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			uniform sampler2D _NormalMap;
 			
 			v2f vert (appdata v)
 			{
@@ -57,6 +59,7 @@
 				o.pos = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.worldNormal = UnityObjectToWorldNormal(v.normal);
+				//o.worldNormal = _NormalMap;
 				o.viewDir = WorldSpaceViewDir(v.vertex);
 				TRANSFER_SHADOW(o)
 				return o;

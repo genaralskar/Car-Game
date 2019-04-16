@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Paralax 2
+  m_Shader: {fileID: 4800000, guid: 07739e70a0fc71a4eb8a4bffb4092877, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_590DAA1E:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B285F472:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B713C660:
+        m_Texture: {fileID: 2800000, guid: 54f04ed8cab09a74ab1a8954fb9bce3b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C5A8A94A:
+        m_Texture: {fileID: 2800000, guid: 4e14cc1b2fd3bbe43b0376a80a89da20, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_584C8CA4_Texture:
+        m_Texture: {fileID: 2800000, guid: 55f28575d2867d94782ae19713160e29, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Subgraph_67CA2DEA_Texture2DC9090764:
+        m_Texture: {fileID: 2800000, guid: 54f04ed8cab09a74ab1a8954fb9bce3b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Subgraph_8D19A0A7_Texture2DC9090764:
+        m_Texture: {fileID: 2800000, guid: 54f04ed8cab09a74ab1a8954fb9bce3b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_2FD22115_Out:
+        m_Texture: {fileID: 2800000, guid: 34d897f03ca72264291a2278dba7739e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_39042C7F: 1
+    - Vector1_5545EA97: 0
+    - Vector1_98B8B964: 0.1
+    - Vector1_9C0D972: 0.1
+    - Vector1_F7E5027D: 0.01
+    - Vector1_F9F09130: -0.05
+    m_Colors:
+    - Color_91A1CA77: {r: 1, g: 1, b: 1, a: 0}
+    - Color_D046AFE0: {r: 1, g: 1, b: 1, a: 0}

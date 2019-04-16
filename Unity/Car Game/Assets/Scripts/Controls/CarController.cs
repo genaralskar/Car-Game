@@ -99,6 +99,7 @@ public class CarController : MonoBehaviour
         //====Takeoff force for faster start, arcadey====
         if (rb.velocity.magnitude < 20 && Input.GetAxis("Vertical") > 0)
         {
+//            print("addng force");
             rb.AddForce(transform.forward * startForce);
         }
 
